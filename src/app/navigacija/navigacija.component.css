@@ -1,0 +1,56 @@
+.prosirenje-obavestenja {
+  max-height: 300px;
+  overflow-y: auto;
+  width: 300%;
+}
+
+.white-space-normal {
+  white-space: normal;
+  border-bottom: 1px solid #474748;
+}
+
+/* .leva-ivica {
+  border-left: 2px solid rgb(184, 23, 117);
+} */
+
+.leva-ivica :hover{
+  border-left: 2px solid #17A2B8;
+}
+
+.leva-ivica * :hover{
+  border: hidden;
+}
+
+.naslov-obavestenja {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow-x: hidden;
+  max-width: 14rem;
+}
+
+.naslov-obavestenja-grad {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+.naslov-obavestenja-ulica {
+  font-weight: 400;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+.tekst-obavestenja {
+  font-size: smaller;
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: inherit;
+  display: inline-block;
+  font-weight: 300;
+}
+
+.vreme-obavestenja {
+  font-weight: normal;
+  color: #d5d5d5;
+  font-size: smaller;
+}

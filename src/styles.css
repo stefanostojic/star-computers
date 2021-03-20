@@ -1,0 +1,175 @@
+/* You can add global styles to this file, and also import other style files */
+.senka {
+  background-color: #73c7ff;
+  -webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
+}
+p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.logoGore {
+  font-size: 0.8em;
+  color: lightyellow;
+  letter-spacing: 0.5em;
+  margin: 0px;
+}
+.logoDole {
+  margin-top: 3px;
+  color: lightyellow;
+  line-height: 0;
+  /* font-size: 0.65em; */
+  text-transform: uppercase;
+  font-size: 0.55em;
+  margin-bottom: 10px;
+}
+.baner {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.saStrane {
+  background-color: red;
+}
+div.col > p {
+  text-align: center;
+  padding-top: 1em;
+  text-transform: uppercase;
+}
+.aktivna-stranica {
+  background-color: rgb(0, 153, 255);
+  text-decoration: underline;
+}
+.neaktivna-stranica {
+  background-color: rgb(78, 184, 255);
+}
+.stranica {
+  color: white;
+  /* font-weight: bold; */
+  height: 4em;
+  /* border-radius: 1em; tamna #2C557E, containter #6D87A0*/
+  margin: 0.0em;
+}
+body {
+  /* background-color: #222830; */
+  background-image: url("resources/poz_v1.jpg");
+  background-size: 25%;
+  background-attachment: fixed;
+  background-repeat: repeat;
+  /* padding: 1em; */
+}
+.paneli {
+  background-color: #343A40;
+  color: white;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  margin-top: 0.5em;
+}
+.paneli-bez-paddinga {
+  background-color: #343A40;
+  color: white;
+  border-radius: 0.5em;
+}
+.padding-u-2-redu {
+  padding: 0.3em;
+  padding-top: 0.6em;
+
+}
+.container-korekcija {
+  background-color: rgba(0, 1, 8, 0.768);
+  margin-bottom: 5em;
+}
+.paddingGoreDole {
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+}
+.card-body {
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  padding-left: 0.0em;
+  padding-right: 0.0em;
+}
+.card-title {
+  font-size: 1em;
+}
+.card-text {
+  font-size: 0.8em;
+  color: gray;
+}
+.donji-red {
+  margin: 0.3em;
+  margin-top: 1em;
+  background-color: #343A40;
+  color: white;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+.active1 {
+  color: #17A2B8 !important;
+  /* text-decoration: underline; */
+  border-bottom: 1px solid #17A2B8;
+}
+.podmeni {
+  background-color: #343A40;
+  color: white !important;
+}
+.podmeni-item {
+  color: white;
+  border-bottom: 1px solid #343A40;
+}
+.podmeni-item:hover {
+  /* color: #17A2B8 !important; */
+  /* color: #17A2B8 !important; */
+  color: white;
+  background-color: rgb(45, 49, 54);
+  /* border-bottom: 1px solid #17A2B8; */
+}
+.naziv-proizvoda {
+  height: 2.4em;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.proizvod-img-no-overflow {
+  overflow: hidden;
+}
+.proizvod-img-no-overflow img {
+  transition: all 0.3s;
+}
+.proizvod-img-no-overflow:hover img {
+  transform: scale(1.1);
+}
+.karakteristike-proizvoda {
+  height: 3em;
+  overflow: hidden;
+}
+.naslov-u-poslednjem-redu {
+  font-size: 1.2em;
+  text-decoration: underline;
+  text-decoration-color: rgb(13, 89, 100);
+}
+.margin-bottom-0 {
+  margin-bottom: 0px;
+}
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+#kolicina {
+  display: inline;
+}
+.center{
+  width: 150px;
+  margin: 10px auto 10px 0px;
+}
+.plavi-okvir {
+  border: 1px solid #17A2B8;
+  /* border: 1px solid rgb(13, 89, 100);  */
+}
+
+.plavi-okvir-bez-debljine {
+  border-color: #17A2B8;
+}

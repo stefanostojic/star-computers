@@ -1,0 +1,54 @@
+.obojenRed {
+  background-color: darkblue;
+}
+
+/* .label-unos {
+  color: white;
+  margin-top: 0.5rem;
+  margin-bottom: 0rem;
+} */
+
+::placeholder { /* Most modern browsers support this now. */
+  color:    rgb(141, 141, 141);
+}
+
+.tabela {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 5px;
+}
+
+.dugme {
+
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.centriranje-reply {
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+}
+
+.komentari {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+input[type="file"] {
+  visibility: hidden;
+  height: 1px;
+}
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+}
+
+.crvena-kanta:hover {
+  color: red;
+}

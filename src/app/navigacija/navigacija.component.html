@@ -1,0 +1,155 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top" id="navigacioniMeni" style="box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.5);">
+    <a class="navbar-brand" routerLink="/" style="padding: 0px !important;">
+        <div>
+            <p class="logoGore">ST<span>☆</span>R</p>
+            <p class="logoDole"><br>computers</p>
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Proizvodi
+                </a>
+                <div class="dropdown-menu podmeni" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item podmeni-item" routerLink="/proizvodi">Svi proizvodi</a>
+                    <div class="dropdown-divider" style="border-top: 1px solid #17A2B8;"></div>
+                    <a class="dropdown-item podmeni-item" routerLink="/proizvodi" [queryParams]="{ kategorija: 'Računar'}">Računari</a>
+                    <a class="dropdown-item podmeni-item" routerLink="/proizvodi" [queryParams]="{ kategorija: 'Laptop'}">Laptopovi</a>
+                    <a class="dropdown-item podmeni-item" routerLink="/proizvodi" [queryParams]="{ kategorija: 'Telefon'}">Mobilni telefoni</a>
+                </div>
+            </li>
+
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Akcije</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Servis
+                </a>
+                <div class="dropdown-menu podmeni" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item podmeni-item" href="#">Običan</a>
+                    <a class="dropdown-item podmeni-item" href="#">Brzi</a>
+                    <div class="dropdown-divider" style="border-top: 1px solid #17A2B8;"></div>
+                    <a class="dropdown-item podmeni-item" href="#">Kontakt</a>
+                </div>
+            </li> -->
+            <li class="nav-item dropdown" *ngIf="isAdmin">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  Administracija
+              </a>
+              <div class="dropdown-menu podmeni" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item podmeni-item" routerLink="administracija/proizvodi">Proizvodi</a>
+                  <a class="dropdown-item podmeni-item" routerLink="administracija/porudzbine">Porudžbine</a>
+                  <a class="dropdown-item podmeni-item" routerLink="administracija/korisnici">Korisnici</a>
+              </div>
+            </li>
+        </ul>
+
+        <!-- DUGMAD ZA REGISTRACIJU I PRIJAVU -->
+        <ul class="nav navbar-nav navbar-right d-sm-none d-md-flex" style="flex-direction: row;">
+
+          <li class="nav-item" style="margin-right: 5px;" *ngIf="userIsAuthenticated && !isAdmin">
+            <div class="btn" style="border: 1px solid #4c4c4c; border-radius: 5px; color: rgba(255,255,255,.7); background-color: #343a40;" routerLink="/korpa" routerLinkActive="text-light">
+              <i class="fas fa-shopping-cart"></i> Korpa
+            </div>
+          </li>
+
+          <li class="nav-item" style="margin-right: 5px;" *ngIf="userIsAuthenticated && !isAdmin">
+            <div class="btn" style="border: 1px solid #4c4c4c; border-radius: 5px; color: rgba(255,255,255,.7); background-color: #343a40;" routerLink="/profil" routerLinkActive="text-light">
+              <i class="fas fa-user"></i> Moj nalog
+            </div>
+          </li>
+
+          <li class="nav-item" style="margin-right: 5px;" *ngIf="!userIsAuthenticated">
+            <div class="btn" style="border: 1px solid #4c4c4c; border-radius: 5px; color: white" routerLink="/registracija">
+              <i class="fas fa-user"></i> Registracija
+            </div>
+          </li>
+
+          <li class="nav-item" *ngIf="!userIsAuthenticated">
+            <div class="btn btn-primary" routerLink="/prijava">
+              <i class="fas fa-sign-in-alt"></i> Prijava
+            </div>
+          </li>
+
+          <li class="nav-item dropdown mr-1" *ngIf="isAdmin">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="far fa-bell"></i> Obaveštenja ({{ukupnoObavestenja}})
+            </a>
+            <div class="dropdown-menu dropdown-menu-right podmeni prosirenje-obavestenja shadow-lg" aria-labelledby="navbarDropdown">
+              <a *ngFor="let obavestenje of obavestenja" class="dropdown-item podmeni-item white-space-normal leva-ivica" (click)="klikNaObavestenje(obavestenje)"
+              routerLink="{{(obavestenje.tip == 'porudzbina') ? 'administracija/porudzbine/' + obavestenje.link : 'administracija/proizvodi/' + obavestenje.link}}">
+
+                <div class="row">
+                  <div class="col-md-2" style="display: flex; justify-content: center; flex-direction: column; text-align: center;">
+                      <i class="fas fa-truck fa-lg" *ngIf="obavestenje.tip == 'porudzbina'"></i>
+                      <i class="fas fa-comment-lines fa-lg" *ngIf="obavestenje.tip == 'komentar'"></i>
+                  </div>
+                  <div class="col-md-10 pl-0">
+                      <div class="d-flex justify-content-between">
+                        <span style="max-width: 14rem; overflow-x: hidden">
+                          <span class="naslov-obavestenja-grad" style="font-size: smaller">{{ obavestenje.naziv | obavestenjeNazivPorudzbine:'grad' }}, </span>
+                          <span class="naslov-obavestenja-ulica" style="font-size: smaller">{{ obavestenje.naziv | obavestenjeNazivPorudzbine:'ulica' }}</span>
+                        </span>
+                        <span class="vreme-obavestenja">{{ obavestenje.datumVreme | obavestenjeDatumVreme }}</span>
+                      </div>
+                      <span class="tekst-obavestenja">{{ obavestenje.opis }}</span>
+                    </div>
+                </div>
+
+              </a>
+              <!-- <div class="row">
+                <div class="col-md-2" style="display: flex; justify-content: center; flex-direction: column; text-align: center;">
+                  <i class="fas fa-truck fa-lg"></i>
+                </div>
+                <div class="col-md-10 pl-0">
+                  <div class="d-flex justify-content-between">
+                    <span class="naslov-obavestenja">hoecete</span>
+                    <span class="vreme-obavestenja">133</span>
+                  </div>
+                  <span class="tekst-obavestenja">daea</span>
+                </div>
+              </div> -->
+                <!-- <div class="d-flex justify-content-center">
+                  <button class="btn btn-primary mt-1" (click)="obavestenjeService.getObavestenjaZaNavigaciju()">Učitaj još</button>
+                </div> -->
+            </div>
+          </li>
+
+
+          <li class="nav-item" *ngIf="userIsAuthenticated">
+            <div class="btn btn-primary" routerLink="/prijava" (click)="onLogout()">
+              <i class="fas fa-sign-out-alt"></i> Odjava
+            </div>
+          </li>
+        </ul>
+
+        <!-- DROPDOWN ZA REGISTRACIJU I PRIJAVU -->
+        <ul class="navbar-nav d-none d-sm-flex d-md-none mb-sm-0">
+
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right podmeni" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-divider" style="border-top: 1px solid #17A2B8;"></div>
+                    <a class="dropdown-item podmeni-item" href="#" data-toggle="modal" data-target="#exampleModal"
+                        data-whatever="Registracija"><i class="fas fa-user"></i> Registracija</a>
+                    <a class="dropdown-item podmeni-item" href="#" data-toggle="modal" data-target="#exampleModal"
+                        data-whatever="Prijava"><i class="fas fa-sign-in-alt"></i> Prijava</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

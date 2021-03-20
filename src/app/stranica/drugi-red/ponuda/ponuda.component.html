@@ -1,0 +1,104 @@
+<!-- 2. RED -->
+<div class="row padding-u-2-redu px-1">
+  <!-- LEVA KOLONA -->
+  <div class="col-md-3 px-0 px-md-1">
+    <div>
+      <!-- PRETRAGA -->
+      <!-- <app-pretraga></app-pretraga> -->
+      <!-- FILTERI -->
+      <app-filter [kategorija]="kategorija" [proizvodaPoStrani]="proizvodaPoStrani"></app-filter>
+    </div>
+  </div>
+  <!-- DESNA KOLONA -->
+  <div class="col-md-9 pl-md-0 pr-md-1 px-0" id="sadrzaj">
+    <div class="paneli plavi-okvir senka px-0">
+      <!-- PONUDA PROIZVODA -->
+
+      <!-- <div class="d-flex justify-content-between">
+        <h5 class="m-2">Ponuda računara: </h5>
+        <span>
+          <h6 class="m-2 d-inline-flex">Sortiranje: </h6>
+          <select class="custom-select custom-select-sm" style="width: 140px" ngModel (ngModelChange)="promenaKriterijumaSortiranja($event)">
+            <!- <option *ngFor="let value of options" [ngValue]="value">{{value.text}}</option> ->
+            <option [ngValue]="'naziv'" selected>Naziv (rastuće)</option>
+            <option [ngValue]="'-naziv'">Naziv (opadajuće)</option>
+            <option [ngValue]="'cena'">Cena (rastuće)</option>
+            <option [ngValue]="'-cena'">Cena (opadajuće)</option>
+            <option [ngValue]="'prodato'">Popularnost (rastuće)</option>
+            <option [ngValue]="'-prodato'">Popularnost (opadajuće)</option>
+          </select>
+        </span>
+      </div> -->
+      <h5 class="m-2">Ponuda računara: </h5>
+      <!-- <div class="d-flex justify-content-between p-2">
+        <h5>Ponuda računara: </h5>
+        <div class="d-flex justify-content-right">
+          <h6 class="mr-2">Sortiranje: </h6>
+          <select class="custom-select custom-select-sm" style="width: 140px" ngModel (ngModelChange)="promenaKriterijumaSortiranja($event)">
+            <!- <option *ngFor="let value of options" [ngValue]="value">{{value.text}}</option> ->
+            <option [ngValue]="'naziv'" selected>Naziv (rastuće)</option>
+            <option [ngValue]="'-naziv'">Naziv (opadajuće)</option>
+            <option [ngValue]="'cena'">Cena (rastuće)</option>
+            <option [ngValue]="'-cena'">Cena (opadajuće)</option>
+            <option [ngValue]="'prodato'">Popularnost (rastuće)</option>
+            <option [ngValue]="'-prodato'">Popularnost (opadajuće)</option>
+          </select>
+        </div>
+      </div> -->
+
+      <div class="row m-0 px-1" id="najprodavaniji-racunari" *ngIf="!ucitavanje">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 py-2 px-1" *ngFor="let proizvod of proizvodi">
+          <div class="px-0 px-md-1">
+            <!-- <div class="card paneli plavi-okvir mx-0 p-2 shadow" routerLink="/proizvodi/{{proizvod._id}}"> -->
+            <div class="card paneli plavi-okvir mx-0 p-2 shadow" routerLink="/proizvodi/{{proizvod._id}}">
+            <!-- <a [routerLink]="['product-list']" [queryParams]="{ page: 99 }">Go to Page 99</a> -->
+
+              <div class="overflow-hidden skaliranje">
+                <img class="card-img-top tranzicija03s" src="{{ proizvod.slika }}" alt="Card image cap">
+              </div>
+
+              <div class="card-body overflow-hidden">
+                <h5 class="card-title naziv-proizvoda">{{proizvod.proizvodjac}} {{ proizvod.naziv }}</h5>
+                <p class="card-text karakteristike-proizvoda" id="karakteristike1">{{ proizvod.sazetOpis }}</p>
+                <a class="btn btn-primary px-2" style="width: 100%;">
+                  <div class="d-flex justify-content-between overflow-hidden" style="white-space: nowrap">
+                    <span style="float: left;">{{proizvod.cena | number:'.2':'sr-Latn'}} din</span>
+                    <span style="float: right;">| <i class="fas fa-shopping-cart"></i></span>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="ucitavanje">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border text-info p-3" role="status" style="height: 10rem; width: 10rem;">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <!-- NUMERACIJA STRANA -->
+      <div class="row">
+        <div class="col flex-container">
+          <!-- <span style="color: #17A2B8" (click)="promenaStrane('prethodna')">&lt;</span>
+          <span style="text-decoration: underline; text-decoration-color: #17A2B8; margin-right: 0.5em; margin-left: 0.5em;" >{{trenutnaStrana}}</span>
+          <span style="color: #17A2B8" (click)="promenaStrane('sledeca')">&gt;</span> -->
+          <span style="color: #808080" (click)="promenaStrane('prethodna')" *ngIf="trenutnaStrana == 1">&lt;</span>
+          <span style="color: #17A2B8" (click)="promenaStrane('prethodna')" *ngIf="trenutnaStrana != 1">&lt;</span>
+          <span style="text-decoration: underline; text-decoration-color: #17A2B8; margin-right: 0.5em; margin-left: 0.5em;" >{{trenutnaStrana}}</span>
+          <span style="color: #808080" (click)="promenaStrane('sledeca')" *ngIf="!(this.trenutnaStrana * this.proizvodaPoStrani < this.ukupnoProizvoda)">&gt;</span>
+          <span style="color: #17A2B8" (click)="promenaStrane('sledeca')" *ngIf="(this.trenutnaStrana * this.proizvodaPoStrani < this.ukupnoProizvoda)">&gt;</span>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col flex-container">
+          <p style="color: grey; font-size: 0.8rem;">Proizvodi {{ proizvodaPoStrani * (trenutnaStrana - 1) + 1 }}-{{ proizvodaPoStrani * (trenutnaStrana - 1) + proizvodi.length}} od {{ ukupnoProizvoda }}</p>
+        </div>
+      </div>
+      <!-- / NUMERACIJA STRANA -->
+    </div>
+  </div>
+</div>

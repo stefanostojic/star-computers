@@ -1,0 +1,114 @@
+<div class="row px-2">
+  <div class="col-12 px-0">
+    <div class="paneli plavi-okvir">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <h5>Moj profil</h5>
+            <form [formGroup]="profilForm" (submit)="sacuvaj()">
+              <label for="naziv" class="label-unos">Email</label>
+              <input class="form-control form-control-sm" formControlName="email" type="email" placeholder="E-Mail" readonly>
+              <label class="label-unos">Ime</label>
+              <input class="form-control form-control-sm" type="text" formControlName="ime" placeholder="ime" required>
+              <div class="w-100 mt-1">
+                <span *ngIf="profilForm.get('ime').invalid && profilForm.get('ime').touched" class="invalid-input">Unesite validano ime.</span>
+              </div>
+              <label class="label-unos">Prezime</label>
+              <input class="form-control form-control-sm" type="text" formControlName="prezime" placeholder="prezime" required>
+              <div class="w-100 mt-1">
+                <span *ngIf="profilForm.get('prezime').invalid && profilForm.get('prezime').touched" class="invalid-input">Unesite validano prezime.</span>
+              </div>
+              <label class="label-unos">Telefon</label>
+              <input class="form-control form-control-sm" type="text" formControlName="telefon" placeholder="telefon" required>
+              <div class="w-100 mt-1">
+                <span *ngIf="profilForm.get('telefon').invalid && profilForm.get('telefon').touched" class="invalid-input">Unesite validan telefon.</span>
+              </div>
+              <label class="label-unos">Grad</label>
+              <input class="form-control form-control-sm" type="text" formControlName="grad" placeholder="grad" required>
+              <div class="w-100 mt-1">
+                <span *ngIf="profilForm.get('grad').invalid && profilForm.get('grad').touched" class="invalid-input">Unesite validan grad.</span>
+              </div>
+              <label class="label-unos">Ulica</label>
+              <input class="form-control form-control-sm" type="text" formControlName="ulica" placeholder="ulica" required>
+              <div class="w-100 mt-1">
+                <span *ngIf="profilForm.get('ulica').invalid && profilForm.get('ulica').touched" class="invalid-input">Unesite validanu ulicu.</span>
+              </div>
+              <label class="label-unos">Poštanski broj</label>
+              <input class="form-control form-control-sm" type="number" formControlName="postanskiBroj" placeholder="poštanski broj" required onkeydown="return event.keyCode !== 69 && event.keyCode !== 190">
+              <div class="w-100 mt-1">
+                <span *ngIf="profilForm.get('postanskiBroj').invalid && profilForm.get('postanskiBroj').touched" class="invalid-input">Unesite validan poštanski broj.</span>
+              </div>
+              <button class="btn btn-primary mt-4" type="submit"><span class="spinner-border spinner-border-sm" *ngIf="cuvanjeUToku"></span> Sačuvaj</button>
+              <div class="alert alert-success mt-4" role="alert" *ngIf="prikazUspesnogAzuriranja">
+                Ažuriranje uspešno!
+                <button type="button" class="close" (click)="prikazUspesnogAzuriranja = false">
+                  <span>&times;</span>
+                </button>
+              </div>
+              <div class="alert alert-warning mt-4" role="alert" *ngIf="prikazGreske">
+                Ažuriranje neuspešno!
+                <button type="button" class="close" (click)="prikazGreske = false">
+                  <span>&times;</span>
+                </button>
+              </div>
+
+            </form>
+        </div>
+        <div class="col-md-8">
+          <h5>Moje porudžbine</h5>
+          <div *ngIf="ucitavanje">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border text-info p-3" role="status" style="height: 10rem; width: 10rem;">
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!ucitavanje">
+            <div *ngIf="porudzbine.length === 0">
+              <div class="d-flex justify-content-center">
+                <p style="color: gray; font-size: smaller;">NEMATE PORUDŽBINA</p>
+              </div>
+            </div>
+            <div class="table-responsive mt-3" *ngIf="porudzbine?.length > 0">
+              <table class="table table-striped table-dark table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th>ID prodžbine</th>
+                    <th>Datum</th>
+                    <th>Stavke</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let porudzbina of porudzbine">
+                    <td>{{ porudzbina._id }}</td>
+                    <td>{{ porudzbina.datumVreme | obavestenjeDatumVreme }}</td>
+                    <td>{{ porudzbina.sadrzaj.length }}</td>
+                    <td>{{ porudzbina.obradjenost }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- NUMERACIJA STRANA -->
+            <div class="row" *ngIf="porudzbine.length !== 0">
+              <div class="col flex-container">
+                <span style="color: #808080" (click)="promenaStrane('prethodna')" *ngIf="trenutnaStrana == 1">&lt;</span>
+                <span style="color: #17A2B8" (click)="promenaStrane('prethodna')" *ngIf="trenutnaStrana != 1">&lt;</span>
+                <span style="text-decoration: underline; text-decoration-color: #17A2B8; margin-right: 0.5em; margin-left: 0.5em;" >{{trenutnaStrana}}</span>
+                <span style="color: #808080" (click)="promenaStrane('sledeca')" *ngIf="!(this.trenutnaStrana * this.porudzbinaPoStrani < this.ukupnoPorudzbina)">&gt;</span>
+                <span style="color: #17A2B8" (click)="promenaStrane('sledeca')" *ngIf="(this.trenutnaStrana * this.porudzbinaPoStrani < this.ukupnoPorudzbina)">&gt;</span>
+              </div>
+
+            </div>
+            <div class="row" *ngIf="porudzbine.length !== 0">
+              <div class="col flex-container">
+                <p style="color: grey; font-size: 0.8rem;">Porudžbine {{ porudzbinaPoStrani * (trenutnaStrana - 1) + 1 }}-{{ porudzbinaPoStrani * (trenutnaStrana - 1) + porudzbine.length}} od {{ ukupnoPorudzbina }}</p>
+              </div>
+            </div>
+            <!-- / NUMERACIJA STRANA -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+
+</div>

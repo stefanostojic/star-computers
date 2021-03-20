@@ -1,0 +1,72 @@
+<div>
+  <div class="row padding-u-2-redu px-1">
+    <div class="col-md-12">
+        <h3 style="color: white;">Korisnici</h3>
+    </div>
+    <div class="col-md-8 px-0 px-md-1">
+      <div class="plavi-okvir paneli-bez-paddinga p-2 mt-2">
+        <!-- LISTA KORISNIKA -->
+        <h5>Lista korisnika</h5>
+        <div class="tabela">
+          <table class="table table-striped table-dark table-hover table-sm">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Ime</th>
+                <th scope="col">Prezime</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let korisnik of korisnici" (click)="odabirKorisnika(korisnik)">
+                <td scope="row">{{ korisnik._id }}</td>
+                <td>{{ korisnik.ime }}</td>
+                <td>{{ korisnik.prezime }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- / LISTA KORISNIKA -->
+      </div>
+    </div>
+    <div class="col-md-4 pl-md-0 pr-md-1 px-0">
+      <div class="paneli plavi-okvir senka px-2">
+
+        <h5 style="color: white;">Izmena</h5>
+
+        <!-- POLJA ZA IZMENU KORISNIKA -->
+        <div>
+          <form [formGroup]="korisnikForm" (submit)="sacuvaj()">
+            <label for="naziv" class="label-unos">ID</label>
+            <input type="text" class="form-control form-control-sm" formControlName="id" placeholder="ID" disabled>
+            <label for="naziv" class="label-unos">Email</label>
+            <input type="text" class="form-control form-control-sm" formControlName="email" placeholder="email" disabled>
+            <p class="invalid-input" *ngIf="korisnikForm.get('email').invalid && korisnikForm.get('email').touched">Unesite email.</p>
+            <label for="naziv" class="label-unos">Ime</label>
+            <input type="text" class="form-control form-control-sm" formControlName="ime" placeholder="ime">
+            <p class="invalid-input" *ngIf="korisnikForm.get('ime').invalid && korisnikForm.get('ime').touched">Unesite ime.</p>
+            <label for="naziv" class="label-unos">Prezime</label>
+            <input type="text" class="form-control form-control-sm" formControlName="prezime" placeholder="prezime">
+            <p class="invalid-input" *ngIf="korisnikForm.get('prezime').invalid && korisnikForm.get('prezime').touched">Unesite prezime.</p>
+            <label for="naziv" class="label-unos">Telefon</label>
+            <input type="text" class="form-control form-control-sm" formControlName="telefon" placeholder="telefon">
+            <p class="invalid-input" *ngIf="korisnikForm.get('telefon').invalid && korisnikForm.get('telefon').touched">Unesite telefon.</p>
+            <label for="naziv" class="label-unos">Grad</label>
+            <input type="text" class="form-control form-control-sm" formControlName="grad" placeholder="grad">
+            <p class="invalid-input" *ngIf="korisnikForm.get('grad').invalid && korisnikForm.get('grad').touched">Unesite grad.</p>
+            <label for="naziv" class="label-unos">Ulica</label>
+            <input type="text" class="form-control form-control-sm" formControlName="ulica" placeholder="ulica">
+            <p class="invalid-input" *ngIf="korisnikForm.get('ulica').invalid && korisnikForm.get('ulica').touched">Unesite ulicu.</p>
+            <label for="naziv" class="label-unos">Poštanski broj</label>
+            <input type="text" class="form-control form-control-sm" formControlName="postanskiBroj" placeholder="poštanski broj">
+            <p class="invalid-input" *ngIf="korisnikForm.get('postanskiBroj').invalid && korisnikForm.get('postanskiBroj').touched">Unesite poštanski broj.</p>
+          </form>
+
+          <button type="submit" (click)="sacuvaj()" class="btn btn-primary dugme" *ngIf="korisnikForm.get('id').value"><i class="far fa-save"></i> Sačuvaj izmene</button>
+          <button type="submit" (click)="delete()" class="btn btn-danger dugme" *ngIf="korisnikForm.get('id').value"><i class="far fa-trash-alt"></i> Obriši</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

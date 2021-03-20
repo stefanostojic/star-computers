@@ -1,0 +1,10 @@
+.tranzicija03s {
+  transition: all 0.3s;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.skaliranje:hover img {
+  transform: scale(1.1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

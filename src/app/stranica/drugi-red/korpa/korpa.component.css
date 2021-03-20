@@ -1,0 +1,17 @@
+.crvena-kanta:hover {
+  color: red;
+}
+
+.link-ka-proizvodu {
+  color: white;
+  font-weight: bold;
+}
+
+.naziv-polja-o-korisniku {
+  margin-bottom: 5px;
+}
+
+.polja-o-korisniku {
+  margin-bottom: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

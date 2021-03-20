@@ -1,0 +1,18 @@
+.label-unos {
+  color: white;
+  margin-top: 0.7rem;
+  margin-bottom: 0.3rem;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+  color:    rgb(141, 141, 141);
+}
+
+.invalid-input {
+  font-size: 0.8rem;
+  margin-bottom: 0rem;
+  background-color: #c36069;
+  padding: 2px 8px;
+  border-radius: 5px;
+  margin-top: 4px;
+}

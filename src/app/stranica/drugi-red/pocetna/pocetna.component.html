@@ -1,0 +1,123 @@
+<!-- 2. RED -->
+<div class="row padding-u-2-redu px-1">
+  <!-- LEVA KOLONA -->
+  <div class="col-md-3 px-0 px-md-1">
+    <!-- PRETRAGA -->
+    <app-pretraga></app-pretraga>
+    <!-- FILTERI -->
+    <!-- <app-drugi-red-kategorije></app-drugi-red-kategorije> -->
+  </div>
+  <!-- DESNA KOLONA -->
+  <div class="col-md-9 pl-md-0 pr-md-1 px-0" id="sadrzaj">
+    <div class="paneli plavi-okvir senka px-0">
+      <!-- PONUDA PROIZVODA -->
+      <h5 class="m-2">Najprodavaniji računari</h5>
+
+      <div *ngIf="ucitavanje">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border text-info p-3" role="status" style="height: 10rem; width: 10rem;">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row m-0 px-1" id="najprodavaniji-racunari">
+
+        <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 py-2 px-1" *ngFor="let proizvod of najprodavanijiRacunari">
+          <div class="px-0 px-md-1">
+            <div class="card paneli plavi-okvir mx-0 p-2 shadow" routerLink="/proizvodi/{{proizvod._id}}">
+
+                <div class="overflow-hidden skaliranje">
+                  <img class="card-img-top tranzicija03s" src={{proizvod.slika}} alt="Card image cap">
+                </div>
+
+                <div class="card-body overflow-hidden">
+                  <h5 class="card-title naziv-proizvoda">{{proizvod.proizvodjac}} {{proizvod.naziv}}</h5>
+                  <p class="card-text karakteristike-proizvoda" id="karakteristike1">{{proizvod.sazetOpis}}</p>
+                  <a class="btn btn-primary px-2" style="width: 100%;" routerLink="/proizvodi/{{proizvod._id}}">
+                    <div class="d-flex justify-content-between overflow-hidden" style="white-space: nowrap">
+                      <span style="float: left;">{{proizvod.cena | number:'.2':'sr-Latn'}} din</span>
+                      <span style="float: right;">| <i class="fas fa-shopping-cart"></i></span>
+                    </div>
+                  </a>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="m-2">Najprodavaniji laptopovi</h5>
+
+      <div *ngIf="ucitavanje">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border text-info p-3" role="status" style="height: 10rem; width: 10rem;">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row m-0 px-1" id="najprodavaniji-racunari">
+
+        <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 py-2 px-1" *ngFor="let proizvod of najprodavanijiLaptopovi">
+          <div class="px-0 px-md-1">
+            <div class="card paneli plavi-okvir mx-0 p-2 shadow" routerLink="/proizvodi/{{proizvod._id}}">
+
+                <div class="overflow-hidden skaliranje">
+                  <img class="card-img-top tranzicija03s" src={{proizvod.slika}} alt="Card image cap">
+                </div>
+
+                <div class="card-body overflow-hidden">
+                  <h5 class="card-title naziv-proizvoda">{{proizvod.proizvodjac}} {{proizvod.naziv}}</h5>
+                  <p class="card-text karakteristike-proizvoda" id="karakteristike1">{{proizvod.sazetOpis}}</p>
+                  <a class="btn btn-primary px-2" style="width: 100%;" routerLink="/proizvodi/{{proizvod._id}}">
+                    <div class="d-flex justify-content-between overflow-hidden" style="white-space: nowrap">
+                      <span style="float: left;">{{proizvod.cena | number:'.2':'sr-Latn'}} din</span>
+                      <span style="float: right;">| <i class="fas fa-shopping-cart"></i></span>
+                    </div>
+                  </a>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="m-2">Najprodavaniji telefoni</h5>
+
+      <div *ngIf="ucitavanje">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border text-info p-3" role="status" style="height: 10rem; width: 10rem;">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row m-0 px-1" id="najprodavaniji-racunari">
+
+        <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 py-2 px-1" *ngFor="let proizvod of najprodavanijiTelefoni">
+          <div class="px-0 px-md-1">
+            <div class="card paneli plavi-okvir mx-0 p-2 shadow" routerLink="/proizvodi/{{proizvod._id}}">
+
+                <div class="overflow-hidden skaliranje">
+                  <img class="card-img-top tranzicija03s" src={{proizvod.slika}} alt="Card image cap">
+                </div>
+
+                <div class="card-body overflow-hidden">
+                  <h5 class="card-title naziv-proizvoda">{{proizvod.proizvodjac}} {{proizvod.naziv}}</h5>
+                  <p class="card-text karakteristike-proizvoda" id="karakteristike1">{{proizvod.sazetOpis}}</p>
+                  <a class="btn btn-primary px-2" style="width: 100%;" routerLink="/proizvodi/{{proizvod._id}}">
+                    <div class="d-flex justify-content-between overflow-hidden" style="white-space: nowrap">
+                      <span style="float: left;">{{proizvod.cena | number:'.2':'sr-Latn'}} din</span>
+                      <span style="float: right;">| <i class="fas fa-shopping-cart"></i></span>
+                    </div>
+                  </a>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
